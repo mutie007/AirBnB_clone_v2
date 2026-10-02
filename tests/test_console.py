@@ -26,8 +26,6 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             self.assertTrue(HBNBCommand().onecmd("EOF"))
 
-    def
-
     def test_emptyline(self):
         """Test empty line"""
         with patch('sys.stdout', new=StringIO()) as f:
