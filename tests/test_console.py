@@ -26,6 +26,8 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             self.assertTrue(HBNBCommand().onecmd("EOF"))
 
+    def
+
     def test_emptyline(self):
         """Test empty line"""
         with patch('sys.stdout', new=StringIO()) as f:
@@ -79,8 +81,9 @@ class TestConsole(unittest.TestCase):
     def test_create_with_number_params(self):
         """Test create with integer and float parameters"""
         with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd(
-                'create Place number_rooms=4 price_by_night=300 latitude=37.77')
+            cmd = ('create Place number_rooms=4 '
+                   'price_by_night=300 latitude=37.77')
+            HBNBCommand().onecmd(cmd)
             place_id = f.getvalue().strip()
             self.assertTrue(len(place_id) > 0)
 
