@@ -43,7 +43,23 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("create MyModel")
             self.assertEqual("** class doesn't exist **\n", f.getvalue())
+    def test_show_missing_class(self):
+        """Test show with missing class"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("show")
+            self.assertEqual("** class name missing **\n", f.getvalue())
 
+    def test_show_invalid_class(self):
+        """Test show with invalid class"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("show MyModel")
+            self.assertEqual("** class doesn't exist **\n", f.getvalue())
+
+    def test_destroy_missing_class(self):
+        """Test destroy with missing class"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd("destroy")
+            self.assertEqual("** class name missing **\n", f.getvalue())
 
 if __name__ == "__main__":
     unittest.main()
