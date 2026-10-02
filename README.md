@@ -1,4 +1,10 @@
-# AirBnB Clone
+## Authors
+
+* **Daniel** <mutie001grizzly@gmail.com>
+* **Trisher** <trisher.moyo@frontiertech.edu>
+
+Original authors of AirBnB_clone:
+(keep whatever was already written)# AirBnB Clone
 
 ## Description
 This is the first step of the AirBnB clone project.
