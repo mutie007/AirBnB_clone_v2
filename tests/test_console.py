@@ -43,6 +43,7 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("create MyModel")
             self.assertEqual("** class doesn't exist **\n", f.getvalue())
+
     def test_show_missing_class(self):
         """Test show with missing class"""
         with patch('sys.stdout', new=StringIO()) as f:
