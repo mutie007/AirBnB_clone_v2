@@ -61,5 +61,6 @@ class TestConsole(unittest.TestCase):
             HBNBCommand().onecmd("destroy")
             self.assertEqual("** class name missing **\n", f.getvalue())
 
+
 if __name__ == "__main__":
     unittest.main()
