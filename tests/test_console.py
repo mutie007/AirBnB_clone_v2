@@ -62,6 +62,28 @@ class TestConsole(unittest.TestCase):
             HBNBCommand().onecmd("destroy")
             self.assertEqual("** class name missing **\n", f.getvalue())
 
+    def test_create_with_params(self):
+        """Test create with parameters"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('create State name="California"')
+            state_id = f.getvalue().strip()
+            self.assertTrue(len(state_id) > 0)
+
+    def test_create_with_string_param(self):
+        """Test create with string parameter containing underscore"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('create Place name="My_little_house"')
+            place_id = f.getvalue().strip()
+            self.assertTrue(len(place_id) > 0)
+
+    def test_create_with_number_params(self):
+        """Test create with integer and float parameters"""
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd(
+                'create Place number_rooms=4 price_by_night=300 latitude=37.77')
+            place_id = f.getvalue().strip()
+            self.assertTrue(len(place_id) > 0)
+
 
 if __name__ == "__main__":
     unittest.main()
