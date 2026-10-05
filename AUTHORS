@@ -1,5 +1,5 @@
 # This file lists all individuals having contributed content to the repository.
-# For format, reference Docker's AUTHORS page.
+# For how it is generated, see `https://github.com/docker/docker/blob/master/hack/generate-authors.sh`.
 
 Daniel <mutie001grizzly@gmail.com>
-Trisher Moyo <trisher.moyo@frontiertech.edu>
+Nvawo <nyawoalamar5@gmail.com>

@@ -1,7 +1,7 @@
 ## Authors
 
 * **Daniel** <mutie001grizzly@gmail.com>
-* **Trisher** <trisher.moyo@frontiertech.edu>
+* **Nvawa** <nyawoalamar5@gmail.com>
 
 Original authors of AirBnB_clone:
 (keep whatever was already written)# AirBnB Clone
