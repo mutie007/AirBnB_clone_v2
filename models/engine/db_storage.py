@@ -29,20 +29,12 @@ class DBStorage:
 
     def all(self, cls=None):
         """Query all objects or objects of a specific class"""
-        from models.user import User
         from models.state import State
         from models.city import City
-        from models.amenity import Amenity
-        from models.place import Place
-        from models.review import Review
 
         classes = {
-            "User": User,
             "State": State,
-            "City": City,
-            "Amenity": Amenity,
-            "Place": Place,
-            "Review": Review
+            "City": City
         }
 
         result = {}
@@ -78,13 +70,8 @@ class DBStorage:
 
     def reload(self):
         """Create all tables and the database session"""
-        # Import all models so they are registered with Base
-        from models.user import User
         from models.state import State
         from models.city import City
-        from models.amenity import Amenity
-        from models.place import Place
-        from models.review import Review
 
         Base.metadata.create_all(self.__engine)
         session_factory = sessionmaker(bind=self.__engine,
