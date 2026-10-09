@@ -3,12 +3,6 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from models.base_model import Base
-from models.user import User
-from models.state import State
-from models.city import City
-from models.amenity import Amenity
-from models.place import Place
-from models.review import Review
 import os
 
 
@@ -35,20 +29,37 @@ class DBStorage:
 
     def all(self, cls=None):
         """Query all objects or objects of a specific class"""
-        classes = [User, State, City, Amenity, Place, Review]
-        result = {}
+        from models.user import User
+        from models.state import State
+        from models.city import City
+        from models.amenity import Amenity
+        from models.place import Place
+        from models.review import Review
 
+        classes = {
+            "User": User,
+            "State": State,
+            "City": City,
+            "Amenity": Amenity,
+            "Place": Place,
+            "Review": Review
+        }
+
+        result = {}
         if cls is None:
-            for c in classes:
+            for c in classes.values():
                 objs = self.__session.query(c).all()
                 for obj in objs:
                     key = "{}.{}".format(obj.__class__.__name__, obj.id)
                     result[key] = obj
         else:
-            objs = self.__session.query(cls).all()
-            for obj in objs:
-                key = "{}.{}".format(obj.__class__.__name__, obj.id)
-                result[key] = obj
+            if type(cls) is str:
+                cls = classes.get(cls)
+            if cls is not None:
+                objs = self.__session.query(cls).all()
+                for obj in objs:
+                    key = "{}.{}".format(obj.__class__.__name__, obj.id)
+                    result[key] = obj
         return result
 
     def new(self, obj):
@@ -67,6 +78,14 @@ class DBStorage:
 
     def reload(self):
         """Create all tables and the database session"""
+        # Import all models so they are registered with Base
+        from models.user import User
+        from models.state import State
+        from models.city import City
+        from models.amenity import Amenity
+        from models.place import Place
+        from models.review import Review
+
         Base.metadata.create_all(self.__engine)
         session_factory = sessionmaker(bind=self.__engine,
                                        expire_on_commit=False)
