@@ -32,11 +32,13 @@ class DBStorage:
         from models.state import State
         from models.city import City
         from models.user import User
+        from models.place import Place
 
         classes = {
             "State": State,
             "City": City,
-            "User": User
+            "User": User,
+            "Place": Place
         }
 
         result = {}
@@ -75,6 +77,7 @@ class DBStorage:
         from models.state import State
         from models.city import City
         from models.user import User
+        from models.place import Place
 
         Base.metadata.create_all(self.__engine)
         session_factory = sessionmaker(bind=self.__engine,
