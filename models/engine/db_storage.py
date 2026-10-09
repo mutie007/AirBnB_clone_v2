@@ -31,10 +31,12 @@ class DBStorage:
         """Query all objects or objects of a specific class"""
         from models.state import State
         from models.city import City
+        from models.user import User
 
         classes = {
             "State": State,
-            "City": City
+            "City": City,
+            "User": User
         }
 
         result = {}
@@ -72,6 +74,7 @@ class DBStorage:
         """Create all tables and the database session"""
         from models.state import State
         from models.city import City
+        from models.user import User
 
         Base.metadata.create_all(self.__engine)
         session_factory = sessionmaker(bind=self.__engine,
