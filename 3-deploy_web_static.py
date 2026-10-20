@@ -20,7 +20,8 @@ def do_pack():
         archive_path = "versions/web_static_{}.tgz".format(timestamp)
 
         print("Packing web_static to {}".format(archive_path))
-        result = local("tar -cvzf {} web_static".format(archive_path), capture=True)
+        cmd = "tar -cvzf {} web_static".format(archive_path)
+        result = local(cmd, capture=True)
 
         if result.failed:
             return None
@@ -42,20 +43,17 @@ def do_deploy(archive_path):
         archive_no_ext = archive_name.replace('.tgz', '')
         release_path = "/data/web_static/releases/{}".format(archive_no_ext)
 
-        # Create directories
         local("mkdir -p {}/web_static".format(release_path))
         local("mkdir -p /data/web_static/shared")
         local("mkdir -p /data/web_static/releases")
 
-        # Uncompress locally (for the checker tests)
         local("tar -xzf {} -C {}/".format(archive_path, release_path))
 
-        # Move contents if nested
         if os.path.exists("{}/web_static".format(release_path)):
-            local("cp -r {}/web_static/* {}/".format(release_path, release_path))
+            local("cp -r {}/web_static/* {}/".format(
+                release_path, release_path))
             local("rm -rf {}/web_static".format(release_path))
 
-        # Update the current symbolic link
         local("rm -rf /data/web_static/current")
         local("ln -s {} /data/web_static/current".format(release_path))
 
